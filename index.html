@@ -353,6 +353,34 @@
  </style>
 </head>
 <body>
+ <script>
+  // Establecer fecha de lanzamiento (1 mes a partir de hoy)
+  const launchDate = new Date();
+  launchDate.setMonth(launchDate.getMonth() + 1);
+
+  const countdown = document.getElementById("countdown");
+
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = launchDate.getTime() - now;
+
+    if (distance < 0) {
+      countdown.innerHTML = "¡La app ya está disponible!";
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    countdown.innerHTML = `⏳ Lanzamiento en: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+
  <div class="hero">
    <div style="background: var(--primary); color: #fff; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; margin-bottom: 1.5rem; font-size: 1.15rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); max-width: 600px; margin-left: auto; margin-right: auto;">
      ¡Estamos en fase Beta! Inscríbete gratis para ser de los primeros en probar Fikso y ayudarnos a perfeccionarlo.
@@ -366,7 +394,6 @@
        <a href="https://docs.google.com/forms/d/e/1FAIpQLSe1_6AS0xEeiDepcC2C9gihxXMElCX4BGM99d8KSjD3Ge_jAQ/viewform?usp=header" target="_blank">Únete ahora</a>
      </nav>
    </header>
-  <div id="countdown" style="margin-top: 1rem; font-size: 1.5rem; font-weight: bold; color: #007aff;"></div>
    <h1>¿Te urge una solución<br>para tu hogar?</h1>
    <p>Conecta con expertos confiables para arreglos en Guadalajara.</p>
    <div class="cta-buttons">
