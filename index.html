@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <title>Fikso - Arreglamos en minutos, no en días</title>
+ <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+ <style>
+   :root {
+     --primary: #007aff;
+     --secondary: #00c6ff;
+     --text: #1a1a1a;
+     --background: #ffffff;
+     --accent-bg: #f0f8ff;
+     --footer: #f4f4f4;
+   }
+   body {
+     margin: 0;
+     font-family: 'Outfit', sans-serif;
+     background-color: var(--background);
+     color: var(--text);
+     scroll-behavior: smooth;
+     overflow-x: hidden;
+   }
+   .container {
+     max-width: 1200px;
+     margin: 0 auto;
+     padding: 0 2rem;
+   }
+   header {
+     background: white;
+     border: 1px solid #e0e0e0;
+     border-radius: 8px;
+     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+     padding: 0.25rem 2rem;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     position: relative;
+     max-width: 1200px;
+     margin: -2rem auto 1rem;
+     z-index: 1000;
+   }
+   .logo { height: 120px; width: auto; }
+   nav { display: flex; align-items: center; gap: 1rem; }
+   nav a {
+     color: var(--text);
+     font-weight: 600;
+     font-size: 1.2rem;
+     text-decoration: none;
+     padding: 0.5rem 0.75rem;
+     transition: color 0.2s, transform 0.2s;
+   }
+   nav a:hover {
+     color: var(--primary);
+     transform: scale(1.05);
+   }
+   nav a:last-child {
+     color: var(--primary);
+     text-decoration: underline;
+   }
+   nav a:last-child:hover {
+     transform: scale(1.05);
+   }
+   .hero {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     min-height: 90vh;
+     text-align: center;
+     padding: 0 1rem 0.5rem;
+     margin-top: -2rem;
+     position: relative;
+     background: transparent;
+   }
+   .hero #tsparticles {
+     position: absolute;
+     width: 100%;
+     height: 100%;
+     top: 0;
+     left: 0;
+     z-index: -1;
+   }
+   .hero h1 {
+     font-size: 6rem;
+     font-weight: 700;
+     margin: 0.5rem 0;
+     background-image: url('https://images.unsplash.com/photo-1689876673591-215e6f1b8a31?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+     background-size: cover;
+     background-attachment: fixed;
+     background-position: center;
+     -webkit-background-clip: text;
+     background-clip: text;
+     color: transparent;
+     -webkit-text-fill-color: transparent;
+     display: inline-block;
+   }
+   .hero p {
+     font-size: 1.25rem;
+     max-width: 600px;
+     margin-bottom: 2rem;
+     color: #333;
+   }
+   .cta-buttons a {
+     background: #000;
+     color: #fff;
+     padding: 1rem 2rem;
+     border-radius: 8px;
+     font-weight: bold;
+     margin: 0.5rem;
+     text-decoration: none;
+     transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+     display: inline-block;
+   }
+   .cta-buttons a:hover {
+     background: var(--primary);
+     transform: scale(1.05);
+     box-shadow: 0 4px 16px rgba(0,122,255,0.15);
+   }
+   /* Sección Servicios */
+   #servicios {
+     padding: 4rem 2rem;
+     background: var(--accent-bg);
+     text-align: center;
+   }
+   #servicios h2 {
+     font-size: 2.5rem;
+     margin-bottom: 1rem;
+   }
+   #servicios p {
+     font-size: 1.25rem;
+     margin-bottom: 2rem;
+   }
+   .servicios-grid {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+     gap: 2rem;
+     max-width: 1200px;
+     margin: 0 auto;
+   }
+   .servicio-item {
+     background: white;
+     padding: 1.5rem;
+     border-radius: 8px;
+     text-align: left;
+     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+   }
+   .servicio-item h3 {
+     margin: 0 0 .5rem;
+     font-size: 1.2rem;
+     display: flex;
+     align-items: center;
+     gap: .5rem;
+   }
+   .servicio-item p { margin: 0; font-size: 1rem; color: #444; }
+   /* Flujo clientes */
+   #como-funciona-clientes {
+     padding: 4rem 2rem;
+     background: var(--background);
+     text-align: center;
+   }
+   #como-funciona-clientes h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+   #como-funciona-clientes p {
+     max-width: 600px;
+     margin: 0.5rem auto;
+     font-size: 1.1rem;
+     color: #333;
+   }
+   #como-funciona-clientes ul {
+     max-width: 600px;
+     margin: 1rem auto;
+     text-align: left;
+     padding: 0;
+     list-style: none;
+   }
+   #como-funciona-clientes li {
+     margin-bottom: 1rem;
+     padding-left: 2rem;
+     position: relative;
+     font-size: 1.1rem;
+   }
+   #como-funciona-clientes li::before {
+     content: '✔';
+     position: absolute;
+     left: 0;
+     color: var(--primary);
+     font-weight: bold;
+   }
+   .porque { padding: 4rem 2rem; background-color: #f9fbff; text-align: center; }
+   .porque h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+   .porque p { font-size: 1.2rem; max-width: 800px; margin: 0 auto 2rem; color: #444; }
+   footer { background: var(--footer); padding: 2rem 1rem; text-align: center; color: #333; font-size: 0.9rem; }
+   footer a { color: var(--primary); text-decoration: none; }
+   @media(max-width:768px){ nav{flex-direction:column;align-items:flex-start;gap:.5rem;} .hero h1{font-size:4.4rem;} .hero p{font-size:1.1rem;} .servicios-grid{grid-template-columns:1fr;} .providers-container{flex-direction:column;} }
+   .footer {
+     background: #f9fbff;
+     padding: 3rem 1rem 1rem 1rem;
+     color: #222;
+     font-size: 1rem;
+     margin-top: 3rem;
+     border-top: 1px solid #e0e0e0;
+   }
+   .footer-container {
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: space-between;
+     max-width: 1200px;
+     margin: 0 auto 2rem auto;
+     gap: 2rem;
+   }
+   .footer-section {
+     min-width: 180px;
+     flex: 1;
+   }
+   .footer-section h4 {
+     font-size: 1.1rem;
+     margin-bottom: 1rem;
+     color: var(--primary);
+   }
+   .footer-section a {
+     display: block;
+     color: #222;
+     text-decoration: none;
+     margin-bottom: 0.5rem;
+     transition: color 0.2s;
+   }
+   .footer-section a:hover {
+     color: var(--primary);
+   }
+   .footer-bottom {
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: space-between;
+     align-items: center;
+     max-width: 1200px;
+     margin: 0 auto;
+     border-top: 1px solid #e0e0e0;
+     padding-top: 1rem;
+     font-size: 0.95rem;
+     color: #888;
+   }
+   @media (max-width: 900px) {
+     .footer-container {
+       flex-direction: column;
+       gap: 1.5rem;
+     }
+     .footer-bottom {
+       flex-direction: column;
+       gap: 0.5rem;
+       text-align: center;
+     }
+   }
+   .how-steps-grid {
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: center;
+     gap: 2.5rem;
+     margin-bottom: 1.5rem;
+   }
+   .how-step {
+     flex: 1 1 180px;
+     max-width: 200px;
+     min-width: 160px;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     text-align: center;
+   }
+   .how-step-illustration {
+     margin-bottom: 1rem;
+   }
+   .how-step-badge {
+     background: var(--primary);
+     color: #fff;
+     font-weight: bold;
+     border-radius: 50%;
+     width: 2rem;
+     height: 2rem;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     margin: 0 auto 0.5rem auto;
+     font-size: 1.1rem;
+     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+   }
+   .how-step-title {
+     font-weight: bold;
+     font-size: 1.1rem;
+     margin-bottom: 0.25rem;
+   }
+   .how-step-desc {
+     color: #555;
+     font-size: 0.98rem;
+     margin-bottom: 0.5rem;
+   }
+   @media (max-width: 900px) {
+     .how-steps-grid {
+       flex-direction: column;
+       align-items: center;
+       gap: 2rem;
+     }
+     .how-step {
+       max-width: 100%;
+       min-width: 0;
+     }
+   }
+   .cta-button, .cta-buttons a {
+     background: #000;
+     color: #fff;
+     padding: 1rem 2rem;
+     border-radius: 8px;
+     font-weight: bold;
+     margin: 0.5rem;
+     text-decoration: none;
+     transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+     display: inline-block;
+   }
+   .cta-button:hover, .cta-buttons a:hover {
+     background: var(--primary);
+     transform: scale(1.05);
+     box-shadow: 0 4px 16px rgba(0,122,255,0.15);
+   }
+   .footer-cta-animated {
+     display: inline-block;
+     background: linear-gradient(90deg, var(--primary), var(--secondary));
+     color: #fff;
+     padding: 1rem 2rem;
+     border-radius: 8px;
+     font-weight: bold;
+     text-decoration: none;
+     font-size: 1.15rem;
+     transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+     box-shadow: 0 0 0 0 rgba(0,122,255,0.5);
+     animation: pulse-grow 1.5s infinite, gradient-move 4s linear infinite;
+     background-size: 200% 200%;
+     position: relative;
+   }
+   .footer-cta-animated:hover {
+     background: linear-gradient(90deg, var(--secondary), var(--primary));
+     box-shadow: 0 0 16px 4px rgba(0,122,255,0.25), 0 4px 16px rgba(0,122,255,0.15);
+     transform: scale(1.09);
+   }
+   @keyframes pulse-grow {
+     0% { transform: scale(1); }
+     50% { transform: scale(1.08); }
+     100% { transform: scale(1); }
+   }
+   @keyframes gradient-move {
+     0% { background-position: 0% 50%; }
+     100% { background-position: 100% 50%; }
+   }
+ </style>
+</head>
+<body>
+ <div class="hero">
+   <div style="background: var(--primary); color: #fff; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; margin-bottom: 1.5rem; font-size: 1.15rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); max-width: 600px; margin-left: auto; margin-right: auto;">
+     ¡Estamos en fase Beta! Inscríbete gratis para ser de los primeros en probar Fikso y ayudarnos a perfeccionarlo.
+   </div>
+   <div id="tsparticles"></div>
+   <header>
+     <img src="logo.png" alt="Fikso logo" class="logo">
+     <nav>
+       <a href="#como-funciona-clientes">Cómo funciona</a>
+       <a href="#porque">¿Por qué Fikso?</a>
+       <a href="https://docs.google.com/forms/d/e/1FAIpQLSe1_6AS0xEeiDepcC2C9gihxXMElCX4BGM99d8KSjD3Ge_jAQ/viewform?usp=header" target="_blank">Únete ahora</a>
+     </nav>
+   </header>
+   <h1>¿Te urge una solución<br>para tu hogar?</h1>
+   <p>Conecta con expertos confiables para arreglos en Guadalajara.</p>
+   <div class="cta-buttons">
+     <a href="#como-funciona-clientes">Quiero un servicio</a>
+     <a href="#porque">Quiero ser proveedor</a>
+   </div>
+ </div>
+ <!-- Servicios -->
+ <section id="servicios">
+   <h2>Fikso arregla en minutos, no en días.</h2>
+   <p>Soluciones especializadas en la ZMG</p>
+   <div class="servicios-grid">
+     <div class="servicio-item">
+       <h3>🔧 Pintura</h3>
+       <p>Conecta con profesionales capaces de realizar trabajos de pintura profesional de exteriores e interiores, con las mejores técnicas. Logra renovar tus espacios con la mejor calidad.</p>
+     </div>
+     <div class="servicio-item">
+       <h3>💡 Electricidad</h3>
+       <p>Reparaciones, cableado, balanceo de cargas, instalación de iluminación y automatización de bombas. Asegura un sistema eléctrico seguro y eficiente.</p>
+     </div>
+     <div class="servicio-item">
+       <h3>🚰 Plomería</h3>
+       <p>Soluciona fugas de agua y gas, instalación de tuberías y sistemas hidráulicos, desazolves y mantenimiento general con rapidez y calidad.</p>
+     </div>
+     <div class="servicio-item">
+       <h3>🏗️ Remodelación</h3>
+       <p>Acabados, herrería, cancelería y remodelación integral de espacios para darles un nuevo aire según tus necesidades.</p>
+     </div>
+     <div class="servicio-item">
+       <h3>🔌 Electrodomésticos</h3>
+       <p>Reparación y mantenimiento de lavadoras, refrigeradores, estufas y más para mantener tus electrodomésticos en óptimas condiciones.</p>
+     </div>
+     <div class="servicio-item">
+       <h3>🪚 Carpintería</h3>
+       <p>Creación y reparación de muebles de madera, instalación de pisos, puertas y detalles de carpintería fina para tu hogar.</p>
+     </div>
+   </div>
+ </section>
+ <!-- Cómo funciona Clientes -->
+ <section id="como-funciona-clientes">
+  <div class="container funciona-card" style="background:white;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.1);padding:2rem;margin:2rem auto;">
+    <h2 style="font-size:2.5rem;margin-bottom:2.5rem;text-align:center;">¿Cómo funciona?</h2>
+    <div class="how-steps-grid">
+      <div class="how-step">
+        <div class="how-step-illustration">
+          <img src="/form.png" alt="Describe tu problema" style="width:96px;height:96px;object-fit:contain;">
+        </div>
+        <div class="how-step-badge">1</div>
+        <div class="how-step-title">Describe tu problema</div>
+        <div class="how-step-desc">Elige el tipo de servicio y dinos qué necesitas.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-illustration">
+          <img src="/chosen.png" alt="Conéctate por WhatsApp" style="width:96px;height:96px;object-fit:contain;">
+        </div>
+        <div class="how-step-badge">2</div>
+        <div class="how-step-title">Conéctate por WhatsApp</div>
+        <div class="how-step-desc">Habla con Fikso y envía tu solicitud en segundos.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-illustration">
+          <img src="/hire.png" alt="Recibe cotizaciones" style="width:96px;height:96px;object-fit:contain;">
+        </div>
+        <div class="how-step-badge">3</div>
+        <div class="how-step-title">Recibe cotizaciones</div>
+        <div class="how-step-desc">Te mandamos opciones de profesionales disponibles y precios.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-illustration">
+          <img src="/schedule.png" alt="Elige y agenda" style="width:96px;height:96px;object-fit:contain;">
+        </div>
+        <div class="how-step-badge">4</div>
+        <div class="how-step-title">Elige y agenda</div>
+        <div class="how-step-desc">Selecciona al proveedor ideal y agenda la visita.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-illustration">
+          <img src="/success.png" alt="Paga con protección" style="width:96px;height:96px;object-fit:contain;">
+        </div>
+        <div class="how-step-badge">5</div>
+        <div class="how-step-title">Paga con protección</div>
+        <div class="how-step-desc">Fikso retiene el pago y lo libera cuando el trabajo esté bien hecho.</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:2rem;"><a href="https://docs.google.com/forms/d/e/1FAIpQLSe1_6AS0xEeiDepcC2C9gihxXMElCX4BGM99d8KSjD3Ge_jAQ/viewform?usp=header" class="cta-button" target="_blank">¡Únete a la lista de espera!</a></div>
+  </div>
+</section>
+ <!-- Cómo funciona Proveedores -->
+ <section id="como-funciona-proveedores">
+  <div class="container funciona-card" style="background:white;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.1);padding:2rem;margin:2rem auto;">
+    <h2 style="font-size:2.5rem;margin-bottom:1rem;text-align:center;">Cómo funciona para proveedores</h2>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:2rem;">
+      <img src="/proveedor.png" alt="Cómo funciona proveedores" style="max-width:400px;width:100%;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.1);flex:1 1 300px;min-width:240px;">
+      <div class="providers-steps" style="max-width:400px;text-align:left;flex:1 1 300px;min-width:240px;">
+        <ul style="list-style:none;padding:0;">
+          <li style="margin-bottom:1rem;position:relative;padding-left:2rem;font-size:1.1rem;"><span style="position:absolute;left:0;color:var(--primary);font-weight:bold;">✔</span> Descarga la app y crea tu cuenta profesional</li>
+          <li style="margin-bottom:1rem;position:relative;padding-left:2rem;font-size:1.1rem;"><span style="position:absolute;left:0;color:var(--primary);font-weight:bold;">✔</span> Completa tu perfil con tu experiencia y documentos</li>
+          <li style="margin-bottom:1rem;position:relative;padding-left:2rem;font-size:1.1rem;"><span style="position:absolute;left:0;color:var(--primary);font-weight:bold;">✔</span> Agrega ejemplos de trabajos realizados</li>
+          <li style="margin-bottom:1rem;position:relative;padding-left:2rem;font-size:1.1rem;"><span style="position:absolute;left:0;color:var(--primary);font-weight:bold;">✔</span> Empieza a recibir solicitudes de servicio al instante</li>
+          <li style="margin-bottom:1rem;position:relative;padding-left:2rem;font-size:1.1rem;"><span style="position:absolute;left:0;color:var(--primary);font-weight:bold;">✔</span> Sin cobros por ser proveedor y con pago garantizado</li>
+          <li style="margin-bottom:1rem;position:relative;padding-left:2rem;font-size:1.1rem;"><span style="position:absolute;left:0;color:var(--primary);font-weight:bold;">✔</span> Toma control de tu tiempo y tus finanzas!</li>
+        </ul>
+        <div style="text-align:center;margin-top:1.5rem;"><a href="https://docs.google.com/forms/d/e/1FAIpQLSc-7F-3uKDU2zkpmGob3FCevqv1X2Nun1do4W0Uma7b5eeo-A/viewform?usp=header" class="cta-button" target="_blank">¡Aplica para formar parte de fikso!</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+ <!-- Por qué Fikso: fase de prueba -->
+ <section id="porque" style="padding:4rem 2rem; background:var(--accent-bg);">
+   <div class="container" style="display:flex; flex-wrap:wrap; align-items:center; gap:2rem;">
+     <div style="flex:1; min-width:300px; text-align:left;">
+       <h2>Estamos desarrollando una plataforma para mejorar la experiencia de contratar servicios de reparación, mantenimiento y remodelación</h2>
+       <p style="max-width:600px; margin:1rem 0; color:#333;">
+         Actualmente estamos en fase de prueba de una plataforma híbrida que conectará clientes con técnicos profesionales validados, 
+         automatizará el proceso de solicitud y garantizará pagos seguros, reduciendo riesgos y tiempos de espera.
+       </p>
+       <p style="max-width:600px; margin:1rem 0; color:#333;">
+         Nuestro compromiso es construir un servicio confiable, eficiente y transparente para que cada proyecto en tu hogar o negocio 
+         se realice con calidad y tranquilidad.
+       </p>
+       <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; margin-top:2rem;">
+         <div style="display:flex; align-items:center; gap:0.5rem; font-weight:600;">
+           <span style="color:var(--primary); font-size:1.5rem;">✔</span> Confianza
+         </div>
+         <div style="display:flex; align-items:center; gap:0.5rem; font-weight:600;">
+           <span style="color:var(--primary); font-size:1.5rem;">✔</span> Eficiencia
+         </div>
+         <div style="display:flex; align-items:center; gap:0.5rem; font-weight:600;">
+           <span style="color:var(--primary); font-size:1.5rem;">✔</span> Variedad de servicios
+         </div>
+         <div style="display:flex; align-items:center; gap:0.5rem; font-weight:600;">
+           <span style="color:var(--primary); font-size:1.5rem;">✔</span> Antecedentes verificados
+         </div>
+         <div style="display:flex; align-items:center; gap:0.5rem; font-weight:600;">
+           <span style="color:var(--primary); font-size:1.5rem;">✔</span> Pago seguro
+         </div>
+         <div style="display:flex; align-items:center; gap:0.5rem; font-weight:600;">
+           <span style="color:var(--primary); font-size:1.5rem;">✔</span> Soporte personalizado
+         </div>
+       </div>
+     </div>
+     <div style="flex:1; min-width:300px; text-align:center;">
+       <img src="https://img.freepik.com/premium-vector/jalisco-state-map-administrative-division-country-mexico-vector-illustration_601298-31952.jpg"
+            alt="Mapa de Jalisco"
+            style="max-width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+     </div>
+   </div>
+ </section>
+ <!-- Misión y Visión de Fikso -->
+ <section id="mision-vision" style="padding:4rem 2rem; background:#ffffff; text-align:center;">
+   <div class="container">
+     <h2>Misión de Fikso</h2>
+     <p style="max-width:800px; margin:0 auto 2rem; font-size:1.1rem; color:#333;">
+       Redefinir la manera en que se contratan servicios para el hogar en México, construyendo confianza, garantizando claridad y entregando resultados medibles.
+     </p>
+     <h2>Visión de Fikso</h2>
+     <p style="max-width:800px; margin:0 auto 2rem; font-size:1.1rem; color:#333;">
+       Formalizar la industria de los servicios del hogar en México, haciendo que el mantenimiento de casas y negocios sea simple, rápido y transparente. Buscamos transformar la experiencia del usuario final y dignificar el trabajo de los proveedores, ayudándolos a profesionalizarse, organizarse y tomar el control de sus ingresos de forma confiable, protegida y predecible.
+     </p>
+   </div>
+ </section>
+ <!-- Scripts -->
+ <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+<script>
+  tsParticles.load("tsparticles", {
+    particles: {
+      number: { value: 30, density: { enable: true, area: 800 } },
+      shape: {
+        type: "char",
+        character: {
+          value: ["🔨","🔧","🏡","🏠","👷‍♂️","⚡"],
+          font: "Verdana",
+          fill: true
+        }
+      },
+      opacity: { value: 0.8 },
+      size: { value: 16, random: true },
+      move: { enable: true, speed: 1, direction: "none", straight: false }
+    },
+    background: { color: "transparent" }
+  });
+</script>
+<footer class="footer">
+  <div class="footer-cta" style="text-align:center; margin-bottom:2rem;">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEs4eOjFJOJAvlbkOhCxzgGmulVCmZoXx9ztYzmzMVc8Yz-A/viewform?usp=header" target="_blank" class="footer-cta-animated">¿Te gustaría unirte a la mision de Fikso? ¡Haz clic aquí!</a>
+  </div>
+  <div class="footer-container">
+    <div class="footer-section contact">
+      <h4>Contacto</h4>
+      <p>📞 3325520551</p>
+      <p>📍 C. Tarahumaras 293, Monraz, 44670 Guadalajara, Jal.</p>
+      <p>✉️ asg@fiksoapp.com</p>
+    </div>
+    <div class="footer-section">
+      <h4>Navega</h4>
+      <a href="#servicios">Servicios</a>
+      <a href="#como-funciona-clientes">Cómo funciona</a>
+      <a href="#porque">¿Por qué Fikso?</a>
+    </div>
+    <div class="footer-section">
+      <h4>Solución</h4>
+      <a href="#">Contáctanos</a>
+      <a href="#">Tecnología</a>
+      <a href="#">Quiénes somos</a>
+    </div>
+    <div class="footer-section">
+      <h4>Descubre</h4>
+      <a href="#">Novedades</a>
+      <a href="#">Profesionales</a>
+      <a href="#">Carreras</a>
+    </div>
+    <div class="footer-section">
+      <h4>Síguenos</h4>
+      <a href="#">Facebook</a>
+      <a href="#">Instagram</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">Twitter</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>©Copyright Fikso.com | Todos los derechos reservados, 2024</span>
+    <span>
+      <a href="#">Privacidad</a> · <a href="#">Términos y condiciones</a>
+    </span>
+  </div>
+</footer>
+</body>
+</html>
