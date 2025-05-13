@@ -366,35 +366,20 @@
        <a href="https://docs.google.com/forms/d/e/1FAIpQLSe1_6AS0xEeiDepcC2C9gihxXMElCX4BGM99d8KSjD3Ge_jAQ/viewform?usp=header" target="_blank">Únete ahora</a>
      </nav>
    </header>
-<script>
-  // Countdown script (debe ejecutarse después de que #countdown exista)
-  const launchDate = new Date();
-  launchDate.setMonth(launchDate.getMonth() + 1);
-
-  const countdown = document.getElementById("countdown");
-
-  function updateCountdown() {
-    const now = new Date().getTime();
-    const distance = launchDate.getTime() - now;
-
-    if (distance < 0) {
-      countdown.innerHTML = "¡La app ya está disponible!";
-      return;
-    }
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    countdown.innerHTML = `⏳ Lanzamiento en: ${days}d ${hours}h ${minutes}m ${seconds}s`;
-  }
-
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-</script>
-</body>
-</html>
+  <div id="countdown" style="
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary);
+  background: #f0f8ff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  margin: 1rem auto;
+  text-align: center;
+  max-width: 600px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+">
+  Cargando cuenta regresiva...
+</div>
 </div>
    <h1>¿Te urge una solución<br>para tu hogar?</h1>
    <p>Conecta con expertos confiables para arreglos en Guadalajara.</p>
@@ -622,6 +607,34 @@
     </span>
   </div>
 </footer>
+ <script>
+  const launchDate = new Date();
+  launchDate.setMonth(launchDate.getMonth() + 1);
+
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = launchDate.getTime() - now;
+
+    const countdown = document.getElementById("countdown");
+    if (!countdown) return;
+
+    if (distance < 0) {
+      countdown.innerHTML = "¡La app ya está disponible!";
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    countdown.innerHTML = `⏳ Lanzamiento en: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+  }
+
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+</script>
+
 </body>
 </html>
 <!-- 
