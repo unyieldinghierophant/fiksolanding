@@ -367,7 +367,7 @@
      </nav>
    </header>
   <div id="countdown" style="
-  font-size: 1.5rem;
+  font-size: 1.05rem;
   font-weight: bold;
   color: var(--primary);
   background: #f0f8ff;
@@ -565,9 +565,8 @@
 <script>
 // Countdown Timer Script
 (function() {
-  // Set the countdown date (7 days from now)
-  var now = new Date();
-  var countdownDate = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+  // Set the countdown date to a fixed date (June 20, 2025, 00:00:00)
+  var countdownDate = new Date('2025-06-20T00:00:00');
   var countdownEl = document.getElementById('countdown');
   var clockEmojis = ["🕛","🕐","🕑","🕒","🕓","🕔","🕕","🕖","🕗","🕘","🕙","🕚"];
   var clockIndex = 0;
