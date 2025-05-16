@@ -3,13 +3,10 @@
 User-agent: *
 Allow: /
 
-# Evita el acceso a archivos sensibles (si los hubiera)
+# Evita el acceso a archivos sensibles
 Disallow: /admin/
 Disallow: /config/
 Disallow: /private/
-
-# Sitemap para ayudar a los buscadores a indexar tu sitio
-Sitemap: https://fiksoapp.com/sitemap.xml
 
 # Bloquea bots conocidos por hacer scraping o spam
 User-agent: MJ12bot
@@ -24,4 +21,6 @@ Disallow: /
 User-agent: DotBot
 Disallow: /
 
+# Sitemap para ayudar a los buscadores a indexar tu sitio
 Sitemap: https://fiksoapp.com/sitemap.xml
+
