@@ -1,0 +1,4 @@
+mkdir favicon
+git add favicon
+git commit -m "create favicon folder"
+git push
