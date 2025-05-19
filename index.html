@@ -42,11 +42,14 @@
    "openingHours": "Mo,Tu,We,Th,Fr 08:00-20:00"
  }
  </script>
- <!-- Favicons and Manifest -->
- <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+ <!-- Favicon and App Icons -->
+ <link rel="icon" type="image/x-icon" href="/favicon.ico">
+ <link rel="icon" type="image/svg+xml" href="/favicon.svg">
  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
- <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
- <link rel="manifest" href="site.webmanifest">
+ <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+ <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+ <meta name="apple-mobile-web-app-title" content="Fikso">
+ <link rel="manifest" href="/site.webmanifest">
  <meta name="msapplication-config" content="/favicon/browserconfig.xml">
  <meta name="theme-color" content="#007aff">
  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
@@ -402,15 +405,15 @@
    <div style="background: var(--primary); color: #fff; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; margin-bottom: 1.5rem; font-size: 1.15rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); max-width: 600px; margin-left: auto; margin-right: auto;">
      ¡Estamos en fase Beta! Inscríbete gratis para ser de los primeros en probar Fikso y ayudarnos a perfeccionarlo.
    </div>
-   <div id="tsparticles"></div>
-   <header>
-     <img src="logo.png" alt="Fikso logo" class="logo">
-     <nav>
+ <div id="tsparticles"></div>
+ <header>
+   <img src="logo.png" alt="Fikso logo" class="logo">
+   <nav>
        <a href="#como-funciona-clientes">Cómo funciona</a>
-       <a href="#porque">¿Por qué Fikso?</a>
-       <a href="https://docs.google.com/forms/d/e/1FAIpQLSe1_6AS0xEeiDepcC2C9gihxXMElCX4BGM99d8KSjD3Ge_jAQ/viewform?usp=header" target="_blank">Únete ahora</a>
-     </nav>
-   </header>
+     <a href="#porque">¿Por qué Fikso?</a>
+     <a href="https://docs.google.com/forms/d/e/1FAIpQLSe1_6AS0xEeiDepcC2C9gihxXMElCX4BGM99d8KSjD3Ge_jAQ/viewform?usp=header" target="_blank">Únete ahora</a>
+   </nav>
+ </header>
    <h1>¿Te urge una solución<br>para tu hogar?</h1>
    <p>Conecta con expertos confiables para arreglos en Guadalajara.</p>
    <div class="cta-buttons">
@@ -574,11 +577,11 @@
  </section>
  <!-- Scripts -->
  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
-<script>
-  tsParticles.load("tsparticles", {
-    particles: {
-      number: { value: 30, density: { enable: true, area: 800 } },
-      shape: {
+ <script>
+   tsParticles.load("tsparticles", {
+     particles: {
+       number: { value: 30, density: { enable: true, area: 800 } },
+       shape: {
         type: "char",
         character: {
           value: ["🔨","🔧","🏡","🏠","👷‍♂️","⚡"],
@@ -591,8 +594,8 @@
       move: { enable: true, speed: 1, direction: "none", straight: false }
     },
     background: { color: "transparent" }
-  });
-</script>
+   });
+ </script>
 <footer class="footer">
   <div class="footer-cta" style="text-align:center; margin-bottom:2rem;">
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSfEs4eOjFJOJAvlbkOhCxzgGmulVCmZoXx9ztYzmzMVc8Yz-A/viewform?usp=header" target="_blank" class="footer-cta-animated">¿Te gustaría unirte a la mision de Fikso? ¡Haz clic aquí!</a>
