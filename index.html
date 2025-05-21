@@ -85,16 +85,23 @@
      justify-content: space-between;
      align-items: center;
      position: relative;
-     max-width: 1200px;
-     margin: -2rem auto 1rem;
+     max-width: 1000px;
+     margin: 0 auto 1rem;
      z-index: 1000;
    }
-   .logo { height: 120px; width: auto; }
-   nav { display: flex; align-items: center; gap: 1rem; }
+   .logo { 
+     height: 144px; 
+     width: auto; 
+   }
+   nav { 
+     display: flex; 
+     align-items: center; 
+     gap: 1rem; 
+   }
    nav a {
      color: var(--text);
      font-weight: 600;
-     font-size: 1.2rem;
+     font-size: 1.44rem;
      text-decoration: none;
      padding: 0.5rem 0.75rem;
      transition: color 0.2s, transform 0.2s;
@@ -121,6 +128,22 @@
      margin-top: -2rem;
      position: relative;
      background: transparent;
+   }
+   .beta-banner {
+     background: var(--primary);
+     color: #fff;
+     padding: 0.75rem 1.5rem;
+     border-radius: 8px;
+     font-weight: 600;
+     margin: 0 auto;
+     font-size: 1.15rem;
+     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+     max-width: 600px;
+     width: 90%;
+     text-align: center;
+     position: relative;
+     z-index: 1001;
+     margin-bottom: 1rem;
    }
    .hero #tsparticles {
      position: absolute;
@@ -243,13 +266,18 @@
    @media(max-width:768px){
      header {
        flex-direction: column;
-       padding: 1rem;
-       margin: 0;
-       border-radius: 0;
+       padding: 0.75rem;
+       margin: 0 auto 1rem;
+       border-radius: 8px;
+       width: 95%;
+       box-sizing: border-box;
      }
      .logo {
-       height: 80px;
-       margin-bottom: 1rem;
+       height: 96px;
+       margin-bottom: 0.5rem;
+       display: block;
+       margin-left: auto;
+       margin-right: auto;
      }
      nav {
        flex-direction: row;
@@ -257,23 +285,32 @@
        justify-content: center;
        gap: 0.5rem;
        width: 100%;
+       padding: 0;
      }
      nav a {
-       font-size: 1rem;
+       font-size: 1.2rem;
        padding: 0.5rem;
+       white-space: nowrap;
      }
      .hero {
        padding: 2rem 1rem;
        min-height: auto;
+       width: 100%;
+       box-sizing: border-box;
      }
      .hero h1 {
        font-size: 2.5rem;
        line-height: 1.2;
        margin: 1rem 0;
+       text-align: center;
+       width: 100%;
      }
      .hero p {
        font-size: 1.1rem;
-       padding: 0 1rem;
+       padding: 0;
+       margin: 0 auto;
+       text-align: center;
+       max-width: 100%;
      }
      .cta-buttons {
        display: flex;
@@ -282,41 +319,83 @@
        width: 100%;
        max-width: 300px;
        margin: 0 auto;
+       padding: 0;
+       align-items: center;
      }
      .cta-buttons a {
        width: 100%;
        text-align: center;
        margin: 0;
+       box-sizing: border-box;
      }
      .servicios-grid {
        grid-template-columns: 1fr;
        gap: 1rem;
-       padding: 0 1rem;
+       padding: 0;
+       width: 100%;
+       box-sizing: border-box;
      }
      .servicio-item {
        padding: 1rem;
+       width: 100%;
+       box-sizing: border-box;
+     }
+     .servicio-item h3 {
+       font-size: 1.1rem;
+       margin-bottom: 0.5rem;
+     }
+     .servicio-item p {
+       font-size: 0.95rem;
+       line-height: 1.4;
      }
      .how-steps-grid {
        gap: 2rem;
+       padding: 0;
+       width: 100%;
+       box-sizing: border-box;
      }
      .how-step {
        min-width: 0;
-       padding: 0 1rem;
+       padding: 0;
+       width: 100%;
+       box-sizing: border-box;
+     }
+     .how-step-illustration img {
+       width: 64px;
+       height: 64px;
      }
      .footer-container {
-       padding: 0 1rem;
+       padding: 0;
+       width: 100%;
+       box-sizing: border-box;
      }
      .footer-section {
        min-width: 0;
        width: 100%;
        text-align: center;
+       padding: 0 1rem;
+       box-sizing: border-box;
      }
      .footer-section a {
        margin: 0.5rem 0;
+       display: inline-block;
      }
      .footer-bottom {
        padding: 1rem;
        text-align: center;
+       width: 100%;
+       box-sizing: border-box;
+     }
+     .container {
+       width: 100%;
+       padding: 0 1rem;
+       box-sizing: border-box;
+     }
+     .beta-banner {
+       margin: 1rem auto 0.75rem;
+       font-size: 1rem;
+       padding: 0.6rem 1.2rem;
+       width: 95%;
      }
    }
    @media(max-width:480px){
@@ -329,17 +408,30 @@
      #servicios h2,
      #como-funciona-clientes h2,
      #porque h2 {
-       font-size: 2rem;
+       font-size: 1.8rem;
+       padding: 0 1rem;
      }
      .how-step-title {
        font-size: 1rem;
      }
      .how-step-desc {
        font-size: 0.9rem;
+       padding: 0 0.5rem;
      }
      .footer-cta-animated {
        font-size: 1rem;
        padding: 0.75rem 1.5rem;
+       width: 90%;
+       max-width: 300px;
+     }
+     .servicio-item {
+       padding: 0.75rem;
+     }
+     .servicio-item h3 {
+       font-size: 1rem;
+     }
+     .servicio-item p {
+       font-size: 0.9rem;
      }
    }
    .footer {
@@ -503,7 +595,7 @@
 </head>
 <body>
  <div class="hero">
-   <div style="background: var(--primary); color: #fff; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; margin-bottom: 1.5rem; font-size: 1.15rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); max-width: 600px; margin-left: auto; margin-right: auto;">
+   <div class="beta-banner">
      ¡Estamos en fase Beta! Inscríbete gratis para ser de los primeros en probar Fikso y ayudarnos a perfeccionarlo.
    </div>
  <div id="tsparticles"></div>
