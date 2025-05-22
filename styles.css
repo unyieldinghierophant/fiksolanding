@@ -160,13 +160,13 @@ header {
 .beta-banner {
   background: #007aff;
   color: #fff;
-  padding: 1rem 1.5rem;
+  padding: 0.4rem 0.4rem;
   border-radius: 12px;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 1.15rem;
   box-shadow: 0 4px 12px rgba(0,122,255,0.15);
-  max-width: 600px;
-  margin: 1.5rem auto;
+  max-width: 1080px;
+  margin: 1.2rem auto;
   text-align: center;
   position: relative;
   z-index: 1001;
@@ -779,6 +779,11 @@ img {
 }
 
 @media (max-width: 767px) {
+  /* Hide desktop header/nav on mobile */
+  header, .header-inner, .main-nav, .nav-menu, .desktop-nav, .header-container, .logo, .hamburger-menu {
+    display: none !important;
+  }
+  /* Mobile header bar */
   .mobile-header {
     display: flex;
     align-items: center;
@@ -839,10 +844,6 @@ img {
   }
   .mobile-menu a:hover {
     background: #f0f8ff;
-  }
-  /* Hide desktop header/nav on mobile */
-  header, .header-inner, .main-nav, .nav-menu, .desktop-nav, .hamburger-menu, .logo {
-    display: none !important;
   }
   body {
     padding-top: 56px;
