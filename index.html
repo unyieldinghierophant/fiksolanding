@@ -10,6 +10,7 @@
 <meta name="author" content="Fikso">
 <title>Fikso - Reparación y Mantenimiento en Guadalajara | Plomeros, Electricistas y más</title>
 <link rel="canonical" href="https://fiksoapp.com/">
+<link rel="stylesheet" href="styles.css">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Fikso | Reparaciones en Guadalajara en minutos">
@@ -396,6 +397,15 @@
     0% { background-position: 0% 50%; }
     100% { background-position: 100% 50%; }
   }
+  /* Desktop: Reduce beta-banner margin and padding */
+  @media (min-width: 768px) {
+    .beta-banner {
+      margin: 0.3rem auto 0.3rem auto;
+      padding: 0.3rem .3rem;
+      max-width: 800px;
+      font-size: 1rem;
+    }
+  }
 </style>
 </head>
 <body>
@@ -419,6 +429,16 @@
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSc-7F-3uKDU2zkpmGob3FCevqv1X2Nun1do4W0Uma7b5eeo-A/viewform?usp=header" target="_blank" rel="noopener">Quiero ser proveedor</a>
   </div>
 </div>
+<!-- Mobile Header (only visible on mobile) -->
+<div class="mobile-header">
+  <img src="logo.png" alt="Fikso logo" class="mobile-logo" />
+  <button class="mobile-hamburger" aria-label="Menu" onclick="document.querySelector('.mobile-menu').classList.toggle('open')">&#9776;</button>
+</div>
+<nav class="mobile-menu">
+  <a href="#como-funciona-clientes">Cómo funciona</a>
+  <a href="#porque">¿Por qué Fikso?</a>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSe1_6AS0xEeiDepcC2C9gihxXMElCX4BGM99d8KSjD3Ge_jAQ/viewform?usp=header" target="_blank">Únete ahora</a>
+</nav>
 <!-- Servicios -->
 <section id="servicios">
   <h2>Fikso arregla en minutos, no en días.</h2>
