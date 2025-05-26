@@ -137,14 +137,9 @@
     .mobile-menu.active {
       display: flex;
       flex-direction: column;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: white;
-      padding: 2rem;
-      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding-top: 0;
     }
   }
 
@@ -346,15 +341,61 @@
 
     .hamburger-menu {
       display: flex;
+      align-items: center;
       font-size: 54px;
       line-height: 1;
       cursor: pointer;
-      align-items: center;
-      justify-content: center;
-      height: 85px;
-      padding: 0;
+      position: relative;
+      width: 40px;
+      height: 40px;
       margin: 0;
-      transform: translateY(-8px);
+      padding: 0;
+      transform: none;
+    }
+
+    .hamburger-menu::before,
+    .hamburger-menu::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 4px;
+      background-color: #333;
+      transition: all 0.3s ease;
+      border-radius: 2px;
+    }
+
+    .hamburger-menu::before {
+      top: 8px;
+    }
+
+    .hamburger-menu::after {
+      bottom: 8px;
+    }
+
+    .hamburger-menu span {
+      position: absolute;
+      width: 100%;
+      height: 4px;
+      background-color: #333;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: all 0.3s ease;
+      border-radius: 2px;
+    }
+
+    .hamburger-menu.active::before {
+      transform: translateY(-50%) rotate(45deg);
+      top: 50%;
+    }
+
+    .hamburger-menu.active::after {
+      transform: translateY(-50%) rotate(-45deg);
+      bottom: 50%;
+    }
+
+    .hamburger-menu.active span {
+      opacity: 0;
+      transform: translateY(-50%) scale(0);
     }
 
     .mobile-menu {
@@ -369,7 +410,24 @@
       height: 100vh;
       text-align: center;
       z-index: 999;
-      padding-top: 80px;
+      padding: 0;
+    }
+
+    .mobile-menu.active {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 0;
+    }
+
+    .mobile-menu .menu-buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
     }
 
     .mobile-menu button {
@@ -377,14 +435,25 @@
       padding: 20px;
       border: none;
       background-color: transparent;
-      font-size: 18px;
+      font-size: 1.2rem;
+      font-weight: 600;
       color: #333;
       cursor: pointer;
       border-bottom: 1px solid #eee;
+      transition: all 0.2s;
+      text-align: center;
+      font-family: 'Outfit', sans-serif;
     }
 
     .mobile-menu button:hover {
-      background-color: #f8f8f8;
+      color: var(--primary);
+      transform: scale(1.05);
+    }
+
+    .mobile-menu button:last-child {
+      border-bottom: none;
+      color: var(--primary);
+      text-decoration: underline;
     }
 
     .hamburger-menu.active + .mobile-menu {
@@ -579,15 +648,27 @@
   @media (max-width: 767px) {
     .hamburger-menu {
       display: flex;
-      font-size: 54px;
-      line-height: 1;
-      cursor: pointer;
-      align-items: center;
-      justify-content: center;
-      height: 85px;
-      padding: 0;
-      margin: 0;
-      transform: translateY(-8px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 4.4rem;
+      background-image: url('https://images.unsplash.com/photo-1689876673591-215e6f1b8a31?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+      background-size: 200% auto;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: scrollBackground 20s linear infinite;
+    }
+
+    @keyframes scrollBackground {
+      0% {
+        background-position: 0% 0%;
+      }
+      100% {
+        background-position: 100% 0%;
+      }
     }
   }
 </style>
@@ -602,11 +683,15 @@
     <div id="tsparticles"></div>
     <header>
       <img src="logo.png" alt="Fikso logo" class="logo">
-      <div class="hamburger-menu">☰</div>
+      <div class="hamburger-menu">
+        <span></span>
+      </div>
       <nav class="mobile-menu">
-        <button onclick="window.location.href='#como-funciona-clientes'">Cómo funciona</button>
-        <button onclick="window.location.href='#porque'">¿Por qué Fikso?</button>
-        <button onclick="window.location.href='https://docs.google.com/forms/d/e/1FAIpQLSe1_6AS0xEeiDepcC2C9gihxXMElCX4BGM99d8KSjD3Ge_jAQ/viewform?usp=header'">Únete ahora</button>
+        <div class="menu-buttons">
+          <button onclick="navigateAndClose('#como-funciona-clientes')">Cómo funciona</button>
+          <button onclick="navigateAndClose('#porque')">¿Por qué Fikso?</button>
+          <button onclick="navigateAndClose('https://docs.google.com/forms/d/e/1FAIpQLSe1_6AS0xEeiDepcC2C9gihxXMElCX4BGM99d8KSjD3Ge_jAQ/viewform?usp=header')">Únete ahora</button>
+        </div>
       </nav>
       <nav class="desktop-nav">
         <a href="#como-funciona-clientes">Cómo funciona</a>
@@ -845,6 +930,24 @@
       this.classList.toggle('active');
       document.querySelector('.mobile-menu').classList.toggle('active');
     });
+
+    function navigateAndClose(target) {
+      // Close the menu
+      document.querySelector('.hamburger-menu').classList.remove('active');
+      document.querySelector('.mobile-menu').classList.remove('active');
+      
+      // Navigate to the target
+      if (target.startsWith('#')) {
+        // For internal links, scroll smoothly
+        const element = document.querySelector(target);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        // For external links, navigate to the URL
+        window.location.href = target;
+      }
+    }
   </script>
 </body>
 </html>
