@@ -88,6 +88,66 @@
     z-index: 1000;
   }
   .logo { height: 120px; width: auto; }
+  
+  /* Ocultar el menú móvil por defecto */
+  .mobile-menu {
+    display: none;
+  }
+
+  /* Estilos para el menú desktop */
+  .desktop-nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .desktop-nav a {
+    color: var(--text);
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    transition: color 0.2s, transform 0.2s;
+  }
+
+  .desktop-nav a:hover {
+    color: var(--primary);
+    transform: scale(1.05);
+  }
+
+  .desktop-nav a:last-child {
+    color: var(--primary);
+    text-decoration: underline;
+  }
+
+  .desktop-nav a:last-child:hover {
+    transform: scale(1.05);
+  }
+
+  /* En móvil, ocultar desktop y mostrar móvil */
+  @media (max-width: 767px) {
+    .desktop-nav {
+      display: none;
+    }
+    
+    .mobile-menu {
+      display: none; /* Se mostrará con JavaScript cuando se active */
+    }
+    
+    .mobile-menu.active {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: white;
+      padding: 2rem;
+      z-index: 1000;
+    }
+  }
+
   nav { display: flex; align-items: center; gap: 1rem; }
   nav a {
     color: var(--text);
@@ -238,7 +298,121 @@
   .porque p { font-size: 1.2rem; max-width: 800px; margin: 0 auto 2rem; color: #444; }
   footer { background: var(--footer); padding: 2rem 1rem; text-align: center; color: #333; font-size: 0.9rem; }
   footer a { color: var(--primary); text-decoration: none; }
-  @media(max-width:768px){ nav{flex-direction:column;align-items:flex-start;gap:.5rem;} .hero h1{font-size:4.4rem;} .hero p{font-size:1.1rem;} .servicios-grid{grid-template-columns:1fr;} .providers-container{flex-direction:column;} }
+  @media(max-width:768px){ 
+    nav{flex-direction:column;align-items:flex-start;gap:.5rem;} 
+    .hero h1{font-size:4.4rem;} 
+    .hero p{font-size:1.1rem;} 
+    .servicios-grid{grid-template-columns:1fr;} 
+    .providers-container{flex-direction:column;} 
+  }
+  @media (max-width: 767px) {
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ffffff;
+      padding: 12px 24px;
+      width: 100%;
+      box-sizing: border-box;
+      border-bottom: 1px solid #ccc;
+      margin: 0;
+      border-radius: 0;
+      box-shadow: none;
+      position: relative;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+    }
+
+    .hero {
+      margin-top: 0;
+      padding-top: 1rem;
+    }
+
+    .hero > div:first-child {
+      display: none;
+    }
+
+    .logo {
+      width: 85px;
+      height: auto;
+      display: flex;
+      align-items: center;
+    }
+
+    .desktop-nav {
+      display: none;
+    }
+
+    .hamburger-menu {
+      display: flex;
+      font-size: 54px;
+      line-height: 1;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      height: 85px;
+      padding: 0;
+      margin: 0;
+      transform: translateY(-8px);
+    }
+
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: white;
+      display: none;
+      width: 100%;
+      height: 100vh;
+      text-align: center;
+      z-index: 999;
+      padding-top: 80px;
+    }
+
+    .mobile-menu button {
+      width: 100%;
+      padding: 20px;
+      border: none;
+      background-color: transparent;
+      font-size: 18px;
+      color: #333;
+      cursor: pointer;
+      border-bottom: 1px solid #eee;
+    }
+
+    .mobile-menu button:hover {
+      background-color: #f8f8f8;
+    }
+
+    .hamburger-menu.active + .mobile-menu {
+      display: block;
+    }
+
+    .hamburger-menu.active {
+      position: fixed;
+      top: 12px;
+      right: 24px;
+      z-index: 1000;
+    }
+
+    .cta-buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      padding: 0 20px;
+    }
+
+    .cta-buttons a {
+      width: 100%;
+      max-width: 300px;
+      text-align: center;
+      margin: 0.5rem 0;
+    }
+  }
   .footer {
     background: #f9fbff;
     padding: 3rem 1rem 1rem 1rem;
@@ -396,6 +570,26 @@
     0% { background-position: 0% 50%; }
     100% { background-position: 100% 50%; }
   }
+  /* Ocultar hamburger menu en desktop */
+  .hamburger-menu {
+    display: none;
+  }
+
+  /* Mostrar hamburger menu en móvil */
+  @media (max-width: 767px) {
+    .hamburger-menu {
+      display: flex;
+      font-size: 54px;
+      line-height: 1;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      height: 85px;
+      padding: 0;
+      margin: 0;
+      transform: translateY(-8px);
+    }
+  }
 </style>
 </head>
 <body>
@@ -408,7 +602,13 @@
     <div id="tsparticles"></div>
     <header>
       <img src="logo.png" alt="Fikso logo" class="logo">
-      <nav>
+      <div class="hamburger-menu">☰</div>
+      <nav class="mobile-menu">
+        <button onclick="window.location.href='#como-funciona-clientes'">Cómo funciona</button>
+        <button onclick="window.location.href='#porque'">¿Por qué Fikso?</button>
+        <button onclick="window.location.href='https://docs.google.com/forms/d/e/1FAIpQLSe1_6AS0xEeiDepcC2C9gihxXMElCX4BGM99d8KSjD3Ge_jAQ/viewform?usp=header'">Únete ahora</button>
+      </nav>
+      <nav class="desktop-nav">
         <a href="#como-funciona-clientes">Cómo funciona</a>
         <a href="#porque">¿Por qué Fikso?</a>
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSe1_6AS0xEeiDepcC2C9gihxXMElCX4BGM99d8KSjD3Ge_jAQ/viewform?usp=header" target="_blank">Únete ahora</a>
@@ -640,6 +840,12 @@
      </span>
    </div>
   </footer>
+  <script>
+    document.querySelector('.hamburger-menu').addEventListener('click', function() {
+      this.classList.toggle('active');
+      document.querySelector('.mobile-menu').classList.toggle('active');
+    });
+  </script>
 </body>
 </html>
 <!--
